@@ -10,7 +10,7 @@ This is a Kaggle competition that challenge the competitor's creative feature en
 Predict the home prices using 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa.
 
 ### 2. Data Description
-The data was downloaded from [Kaggle.com] (https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data). There are 1,460 properties with price labels in the train set and 1,459 without price label in the test set. Each home contains 79 features, and the description of these features can be found in this [file](./data/data_description.txt). 
+The data was downloaded from [Kaggle.com](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data). There are 1,460 properties with price labels in the train set and 1,459 without price label in the test set. Each home contains 79 features, and the description of these features can be found in this [file](./data/data_description.txt). 
 
 **Acknowledgments**
 The Ames Housing dataset was compiled by Dean De Cock for use in data science education. It's an incredible alternative for data scientists looking for a modernized and expanded version of the often cited Boston Housing dataset. 
@@ -63,13 +63,13 @@ For feature engineering, the EDA process evaluated 4 proposals: **Remove Outlier
 
 #### 4.1 Remove Outliers
 Scatter plot is used to explore the outliers. Three ourliers including 1 invalid outlier due to typo for `YearBuilt` and 2 valid outliers. The typo is fixed during the data cleaning process. Two valid outliers are presented in the scatter plot below.
-![4.1_remove_outliers](./image/4.1_remove_outliers). 
+![4.1_remove_outliers](./image/4.1_remove_outliers.png). 
 
 Two vary large home, properties `1299` and `524` (circled in red), were sold at unusually low prices. The solution is to remove these two outliers to improve the model generalization, which is validated by the Kaggle competition score discussed in the **Section 6**. 
 
 
 #### 4.2 Transform Numerical Features
-Transforming the right-skewed data to normal distribution is a frequently used technique for improving the model. The distribution of numerical features and price label are explored using histogram through **Seaborn** package's `histplot` method. For features shows right-skewed distribution, `normal`, `log`, and `Johnson SU` transformation are evaluated using overlapping fitting lines to expore the best transformation option. 
+Transforming the right-skewed data to normal distribution is a frequently used technique for improving the model. The distribution of numerical features and price label are explored using histogram through **Seaborn** package's `histplot` method. For features shows right-skewed distribution, `normal`, `log`, and `Johnson SU` transformation are evaluated using overlapping fitting lines to expore the best transformation option. See the EDA for `SalePrice` below as an example.
 ![4.2_numerical_distribution_fit](./image/4.2_numerical_distribution_fit.png)
 
 Sklearn's `PowerTransformer` and its default option of `yeo-johnson` is used to transform the following features.
