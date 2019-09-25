@@ -59,7 +59,7 @@ Data are explored in this section using the **data visualization** techniques fo
 - Evaluate and decide data processing & feature engineering strategies, and
 - Explore and decide the initial regression algorithms
 
-For feature engineering, the EDA process evaluated 4 proposals: **Remove Outliers**, **Transform Numerical Features**, **Encode Categorical Features**, and **Generate Polynomial Terms**.
+For feature engineering, the EDA process evaluated 4 proposals: **Remove Outliers**, **Transform Numerical Features**, **Encode Categorical Features**, **Explore Correlation**, and **Generate Polynomial Terms**.
 
 #### 4.1 Remove Outliers
 Scatter plot is used to explore the outliers. Three ourliers including 1 invalid outlier due to typo for `YearBuilt` and 2 valid outliers. The typo is fixed during the data cleaning process. Two valid outliers are presented in the scatter plot below.
@@ -99,11 +99,12 @@ The `ANOVA` test is performed to determine whether the partition of variances (d
 
 `Street`, `Utility`, and `CentralAir` have two levels. The data for `Street` and `Utilities` are highly unbalanced (e.g., ratio of two classes are 1454: 6 for `Street`, 1459 to 1 for `Utilities`). These features are deleted because there are not enough information to learn the differences. `CentralAir` is kept in the analysis. 
 
-Based on the EDA, categorical features are encoded using ordinal numbers based on the `SalePrice` mean. See the example with `Neighborhood` below:
+Based on the EDA, categorical features are encoded using ordinal numbers based on the `SalePrice` mean. Histograms of `Neighborhood` and `GarageFinish` after encoding are shown below as examples:
+![5.2_categorical_encoding](./image/5.2_categorical_encoding.png)
 
+#### 4,4 Explore Correlation
 
-#### 4.4 Generate Polynomial Features
-
+#### 4.5 Generate Polynomial Features
 
 ### Model Data
 
