@@ -132,7 +132,12 @@ Based on the EDA, categorical features are encoded using ordinal numbers based o
 For multivariate linear regression, features should have linear relationship with the target label and are independent from each other. However, in reality, this is rarely the case. Correlation between the property price and each feature are explored using both **Pearson** and **Spearman** correlation factors. Correlation between two features are explored using **heatmap**.
 
 **Pearson** and **Spearman**
-As shown in the correlation plot below, 
+As shown in the correlation plot below, `OverallQual`, `GrLivArea`, and `Neighborhood` are the top three features with the strongest correlation with the home price.
+![4.5_corelation_price_feature.png](./image/4.5_corelation_price_feature.png)
+
+**heatmap**
+In this dataset, several features have strong correlations between each other. For instance, `GarageArea` and `GarageCars` have strong correlation, which makes sense. The heatmap below shows the correlation between numerical features. The correlation between categorical features and categorical-numerical feature correlations are also explored using heatmap but are not shown in this readme file.
+![4.6_corelation_feature_feature.png](./image/4.6_corelation_feature_feature.png)
 
 #### 4.5 Generate Polynomial Features
 
