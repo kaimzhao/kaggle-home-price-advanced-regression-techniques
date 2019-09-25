@@ -91,7 +91,7 @@ The common ways for converting categorical features to numerical data is either 
 
 **Boxplot**: Initial visual exploration
 Partition of variance are visually explored for every feature. For instance, as shown in the boxplot below, `Neighborhood` have big impact to the housing price, which makes sense.
-![4.3_categorical_boxplot](./image/4.2_categorical_boxplot.png)
+![4.3_categorical_boxplot](./image/4.3_categorical_boxplot.png)
 
 **ANOVA**: partition of variance
 The `ANOVA` test is performed to determine whether the partition of variances (difference of the mean among each level) of the property price due to the different level/value of each feature are statistically significant. Note that the one-way `ANOVA` test is usally used to evaluate features with 3 or more levels. The analysis here follows this guidance. A p-value of 0.05 is used to determine the statistical significance. As shown in the f-value and p-value plot below, most categorical features except `LandSlope` do impact the home price.
