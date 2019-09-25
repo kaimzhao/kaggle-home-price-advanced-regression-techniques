@@ -128,21 +128,27 @@ Based on the EDA, categorical features are encoded using ordinal numbers based o
 
 ![5.2_categorical_encoding](./image/5.2_categorical_encoding.png)
 
-#### 4,4 Explore Correlation
-For multivariate linear regression, features should have linear relationship with the target label and are independent from each other. However, in reality, this is rarely the case. Correlation between the property price and each feature are explored using both **Pearson** and **Spearman** correlation factors. Correlation between two features are explored using **heatmap**.
+#### 4.4 Explore Correlation
+For multivariate linear regression, features should have linear relationship with the target label and are independent from each other. However, in reality, this is rarely the case. Correlation between the property price and each feature are explored using both **Pearson** correlation factor. Correlation between two features are explored using **heatmap**.
 
-**Pearson** and **Spearman**
+**Pearson**
+
 As shown in the correlation plot below, `OverallQual`, `GrLivArea`, and `Neighborhood` are the top three features with the strongest correlation with the home price.
 ![4.5_corelation_price_feature.png](./image/4.5_corelation_price_feature.png)
 
 **heatmap**
+
 In this dataset, several features have strong correlations between each other. For instance, `GarageArea` and `GarageCars` have strong correlation, which makes sense. The heatmap below shows the correlation between numerical features. The correlation between categorical features and categorical-numerical feature correlations are also explored using heatmap but are not shown in this readme file.
 ![4.6_corelation_feature_feature.png](./image/4.6_corelation_feature_feature.png)
 
 #### 4.5 Generate Polynomial Features
+Generating higher order terms for certain features is a common feature generation technique. Plots of feature values/levels vs. associated the average sales price (after transformation) are used to determine the need and order of the polynomial term. For example, the s-shaped curve shown below for `SaleCondition` and `BsmtExposure` suggests the model may benefit from the 3rd order polynomial term for these features.
+![4.7_Polynomial.png](./image/4.7_Polynomial.png)
 
-### Model Data
+### 5. Model Data
 
-### Evaluate Model
+### 6. Evaluate Model
 
-### Next Step
+### 7. Next Step
+1. Dimension reduction trough Principal Component Analysis (PCA).
+2. More advanced regression algorithms such as Random Forest and XGBoost.
