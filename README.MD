@@ -1,8 +1,9 @@
 # Kaggle Project - Home Price Advanced Regression Techniques
 
 ## Executive Summary
-This is a Kaggle competition that challenge the competitor's creative feature engineeing and advanced regression skills to predict the the home prices using 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa.
+This is a Kaggle competition that challenge the competitor's creative feature engineeing and advanced regression skills to predict the the home prices using 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa. The process goes through data cleaning, data exploration, data processing, feature engineeing, modeling, and model evaluation and achieved a Kaggle score of 0.123 and rank of 1,438 out of 4,640 teams.
 
+I also attemp to improve the model by removing data with absolute error larger than $80,000. This approach improves the R^2 score based on the train set but produces worse Kaggle score. The removal of additional data worsen the generalization of the model (overfit to the train set) and is therefore not recommended.
 
 ## Folder Structure
 ```
@@ -141,13 +142,44 @@ As shown in the correlation plot below, `OverallQual`, `GrLivArea`, and `Neighbo
 In this dataset, several features have strong correlations between each other. For instance, `GarageArea` and `GarageCars` have strong correlation, which makes sense. The heatmap below shows the correlation between numerical features. The correlation between categorical features and categorical-numerical feature correlations are also explored using heatmap but are not shown in this readme file.
 ![4.6_corelation_feature_feature.png](./image/4.6_corelation_feature_feature.png)
 
+
 #### 4.5 Generate Polynomial Features
 Generating higher order terms for certain features is a common feature generation technique. Plots of feature values/levels vs. associated the average sales price (after transformation) are used to determine the need and order of the polynomial term. For example, the s-shaped curve shown below for `SaleCondition` and `BsmtExposure` suggests the model may benefit from the 3rd order polynomial term for these features.
 ![4.7_Polynomial.png](./image/4.7_Polynomial.png)
 
+Based on the plots, 3rd degree polynomial terms assoiated with the following features are added to the data:
+
+```         ['BldgType',
+             'ExterCond',
+             'Exterior2nd',
+             'BsmtExposure',
+             'BsmtFinType1',
+             'BsmtFinType2',
+             'Fence',
+             'Functional',
+             'PoolQC',
+             'SaleCondition',
+             'Heating',
+             'GarageQual',
+             'GarageCond',
+             'MiscFeature']
+```
+
+After adding the polynomial terms, the total number of features increases to 104. Due to the large number of features and the co-linearity among features, algorithms with automatic feature selection such as Linear Regression with Lasso Regularization is appropriate for the initial modeling. 
+
 ### 5. Model Data
+The data were modeled using `Sklearn`'s `Lasso Regression`. `StandardScaler` is applied to scale all features. The model is tuned by iteration through a range of `alpha`, the hyperparameter of Lasso Regression that governs the strength of the regularization, using `Pipeline` and `GridSearchCV` to search for the best model (model that produces the best R^2 score). 
 
 ### 6. Evaluate Model
+The model produces a R^2 score of 0.92 based on the train set. The property prices predicted using test set achieve a best Kaggle score of 0.123, which is currently ranked at 1,438 out of 4,640 teams. 
+
+The **coefficient** of each feature are plot below. The top features are consistent with the correlation coefficient plotted in **Section 4.4**. Majority of the higher order term are actually deselected by the Lasso model. 
+![6.1_model_coefficient](./image/6.1_model_coefficient.png)
+
+The error plots shows that the model is not an ideal linear model due to error's **Heteroscedasticity** (the variance of error is unequal across the range of predicted property prices). The distribution of error skews towards negative values. 
+![6.2_error_plot](./image/6.2_error_plot.png)
+
+In this practise, I attemp to remove additional outliers based on the error plots (e.g., remove all data with absolute error larger than $80,000. This approach improves the R^2 score based on the train set but produces worse Kaggle score. This indicates the removal of additional outliers worsen the generalization of the model and is therefore not recommended.
 
 ### 7. Next Step
 1. Dimension reduction trough Principal Component Analysis (PCA).
