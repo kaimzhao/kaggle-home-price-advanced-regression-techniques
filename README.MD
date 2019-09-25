@@ -55,8 +55,8 @@ MiscFeature|1406|1408|No MF|--|--|1406|1408
 SaleType|0|1|Missing Data|id: 2490|WD|0|0
 
 ### 4. Explore Data (EDA)
-Data are explored in this section mainly using **data visualization** technique for the following two main purposes:
-- Evaluate and decide feature engineering strategy, and
+Data are explored in this section using the **data visualization** techniques for the following two purposes:
+- Evaluate and decide data processing & feature engineering strategies, and
 - Explore and decide the initial regression algorithms
 
 For feature engineering, the EDA process evaluated 4 proposals: **Remove Outliers**, **Transform Numerical Features**, **Encode Categorical Features**, and **Generate Polynomial Terms**.
@@ -72,7 +72,7 @@ Two vary large home, properties `1299` and `524` (circled in red), were sold at 
 Transforming the right-skewed data to normal distribution is a frequently used technique for improving the model. The distribution of numerical features and price label are explored using histogram through **Seaborn** package's `histplot` method. For features shows right-skewed distribution, `normal`, `log`, and `Johnson SU` transformation are evaluated using overlapping fitting lines to expore the best transformation option. See the EDA for `SalePrice` below as an example.
 ![4.2_numerical_distribution_fit](./image/4.2_numerical_distribution_fit.png)
 
-Sklearn's `PowerTransformer` and its default option of `yeo-johnson` is used to transform the following features.
+Sklearn's `PowerTransformer` and its default option of `yeo-johnson` is used to transform the following features and discussed below.
 ```
               ['LotFrontage', 
               'LotArea', 
@@ -82,8 +82,24 @@ Sklearn's `PowerTransformer` and its default option of `yeo-johnson` is used to 
               'GrLivArea',
               'GarageArea']
 ```
+Examples of transformed data is shown below (again using `SalePrice`):
+![5.1_numerical_transformation](./image/5.1_numerical_transformation.png)
+
 
 #### 4.3 Encode Categorical Features
+The common ways for converting categorical features to numerical data is either creating dummy variables (e.g., one-hot encoding) or encoding the features with ordinal numbers. `Boxplot` and `Analysis of Variable` (`ANOVA`) anlaysis are used in this section to establish the basis for the encoding stragy.
+
+**Boxplot**: Initial visual exploration
+Partition of variance are visually explored for every feature. For instance, as shown in the boxplot below, `Neighborhood` have big impact to the housing price, which makes sense.
+![4.3_categorical_boxplot](./image/4.2_categorical_boxplot.png)
+
+**ANOVA**: partition of variance
+The `ANOVA` test is performed to determine whether the partition of variances (difference of the mean among each level) of the property price due to the different level/value of each feature are statistically significant. Note that the one-way `ANOVA` test is usally used to evaluate features with 3 or more levels. The analysis here follows this guidance. A p-value of 0.05 is used to determine the statistical significance. As shown in the f-value and p-value plot below, most categorical features except `LandSlope` do impact the home price.
+![4.4_categorical_anova](./image/4.4_categorical_anova.png)
+
+`Street`, `Utility`, and `CentralAir` have two levels. The data for `Street` and `Utilities` are highly unbalanced (e.g., ratio of two classes are 1454: 6 for `Street`, 1459 to 1 for `Utilities`). These features are deleted because there are not enough information to learn the differences. `CentralAir` is kept in the analysis. 
+
+Based on the EDA, categorical features are encoded using ordinal numbers based on the `SalePrice` mean. See the example with `Neighborhood` below:
 
 
 #### 4.4 Generate Polynomial Features
