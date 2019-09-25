@@ -26,6 +26,9 @@ I also attemp to improve the model by removing data with absolute error larger t
 |   |__ 4.6_corelation_feature_feature.png
 |   |__ 5.1_numerical_transformation.png
 |   |__ 5.2_categorical_encoding.png
+|   |__ 6.1_model_coefficient.png
+|   |__ 5.1_numerical_transformation.png
+|   |__ 6.2_error_plot.png
 |__ submission
 |   |__ lasso.csv
 |   |__ lasso_no_outliers.csv
@@ -179,7 +182,7 @@ The **coefficient** of each feature are plot below. The top features are consist
 The error plots shows that the model is not an ideal linear model due to error's **Heteroscedasticity** (the variance of error is unequal across the range of predicted property prices). The distribution of error skews towards negative values. 
 ![6.2_error_plot](./image/6.2_error_plot.png)
 
-In this practise, I attemp to remove additional outliers based on the error plots (e.g., remove all data with absolute error larger than $80,000. This approach improves the R^2 score based on the train set but produces worse Kaggle score. This indicates the removal of additional outliers worsen the generalization of the model and is therefore not recommended.
+In this practise, I attemp to remove additional outliers based on the error plots (e.g., remove all data with absolute error larger than $80,000). This approach improves the R^2 score based on the train set but produces worse Kaggle score. This indicates the removal of additional outliers worsen the generalization of the model and is therefore not recommended.
 
 ### 7. Next Step
 1. Dimension reduction trough Principal Component Analysis (PCA).
