@@ -5,6 +5,31 @@ This is a Kaggle competition that challenge the competitor's creative feature en
 
 
 ## Folder Structure
+```
+|__ code
+|   |__ part_1_data_cleaning.ipynb    
+|   |__ part_2_eda.ipynb  
+|   |__ part_3_preprocessing_and_feature_engineering.ipynb 
+|   |__ part_4_modeling.ipynb 
+|__ data
+|   |__ data_description.txt
+|   |__ train.csv
+|   |__ test.csv
+|   |__ sample_submission.csv
+|__ images
+|   |__ 4.1_remove_outliers.png
+|   |__ 4.2_numerical_distribution_fit.png
+|   |__ 4.3_categorical_boxplot.png
+|   |__ 4.4_categorical_anova.png
+|   |__ 4.5_corelation_price_feature.png
+|   |__ 4.6_corelation_feature_feature.png
+|   |__ 5.1_numerical_transformation.png
+|   |__ 5.2_categorical_encoding.png
+|__ submission
+|   |__ lasso.csv
+|   |__ lasso_no_outliers.csv
+|__ README.md
+```
 
 ### 1. State the Problem
 Predict the home prices using 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa.
@@ -54,7 +79,7 @@ Fence|1179|1169|No Fence|--|--|1179|1169
 MiscFeature|1406|1408|No MF|--|--|1406|1408
 SaleType|0|1|Missing Data|id: 2490|WD|0|0
 
-### 4. Explore Data (EDA)
+### 4. Explore Data (EDA), Process Data, and Engineer Features
 Data are explored in this section using the **data visualization** techniques for the following two purposes:
 - Evaluate and decide data processing & feature engineering strategies, and
 - Explore and decide the initial regression algorithms
@@ -100,9 +125,14 @@ The `ANOVA` test is performed to determine whether the partition of variances (d
 `Street`, `Utility`, and `CentralAir` have two levels. The data for `Street` and `Utilities` are highly unbalanced (e.g., ratio of two classes are 1454: 6 for `Street`, 1459 to 1 for `Utilities`). These features are deleted because there are not enough information to learn the differences. `CentralAir` is kept in the analysis. 
 
 Based on the EDA, categorical features are encoded using ordinal numbers based on the `SalePrice` mean. Histograms of `Neighborhood` and `GarageFinish` after encoding are shown below as examples:
+
 ![5.2_categorical_encoding](./image/5.2_categorical_encoding.png)
 
 #### 4,4 Explore Correlation
+For multivariate linear regression, features should have linear relationship with the target label and are independent from each other. However, in reality, this is rarely the case. Correlation between the property price and each feature are explored using both **Pearson** and **Spearman** correlation factors. Correlation between two features are explored using **heatmap**.
+
+**Pearson** and **Spearman**
+As shown in the correlation plot below, 
 
 #### 4.5 Generate Polynomial Features
 
